@@ -949,3 +949,23 @@ mp.register_event("file-loaded", file_load)
 mp.register_event("shutdown", shutdown)
 
 mp.register_idle(watch_changes)
+
+mp.add_key_binding(nil, "thumb_rerun", function()
+    clear()
+    shutdown()
+    auto_run = true
+    file_load()
+    mp.osd_message("缩略图功能已重启", 2)
+end)
+mp.add_key_binding(nil, "thumb_toggle", function()
+    if auto_run then
+        auto_run = false
+        file_load()
+        shutdown()
+        mp.osd_message("缩略图功能已禁用", 2)
+    else
+        auto_run = true
+        file_load()
+        mp.osd_message("缩略图功能已启用", 2)
+    end
+end)
